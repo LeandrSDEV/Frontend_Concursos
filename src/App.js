@@ -16,15 +16,23 @@ function App() {
   };
 
   const submit = async (e) => {
-    e.preventDefault();
+  e.preventDefault();
 
-    const data = new FormData();
-    Object.keys(form).forEach((k) => data.append(k, form[k]));
-    data.append("imagem", imagem);
+  const data = new FormData();
+  Object.keys(form).forEach((k) => data.append(k, form[k]));
+  data.append("imagem", imagem);
 
-    await axios.post("http://localhost:8080/api/aprovados", data);
+  try {
+    await axios.post(
+      "https://formulario-concurso1.onrender.com/api/aprovados",
+      data
+    );
     alert("Cadastro realizado com sucesso!");
-  };
+  } catch (error) {
+    console.error(error);
+    alert("Erro ao cadastrar");
+  }
+};
 
   return (
     <div className="container">
